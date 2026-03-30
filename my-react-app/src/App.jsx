@@ -1,120 +1,78 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
+const featuredContent = [
+  {
+    title: 'Dune: Part Two',
+    type: 'فیلم',
+    year: '2024',
+    genre: 'علمی‌تخیلی',
+    rating: '8.7',
+  },
+  {
+    title: 'Severance',
+    type: 'سریال',
+    year: '2022',
+    genre: 'درام / معمایی',
+    rating: '8.6',
+  },
+  {
+    title: 'The Batman',
+    type: 'فیلم',
+    year: '2022',
+    genre: 'اکشن / جنایی',
+    rating: '8.1',
+  },
+  {
+    title: 'Shōgun',
+    type: 'سریال',
+    year: '2024',
+    genre: 'تاریخی / جنگی',
+    rating: '8.8',
+  },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [theme, setTheme] = useState('dark')
+
+  const toggleTheme = () => {
+    setTheme((currentTheme) => (currentTheme === 'dark' ? 'light' : 'dark'))
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <div className={`app theme-${theme}`}>
+      <header className="topbar">
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <p className="eyebrow">Cinema Hub</p>
+          <h1>سایت فیلم و سریال</h1>
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+        <button className="theme-toggle" onClick={toggleTheme}>
+          {theme === 'dark' ? 'حالت لایت' : 'حالت دارک'}
         </button>
+      </header>
+
+      <section className="hero">
+        <h2>بهترین فیلم‌ها و سریال‌ها را یک‌جا پیدا کن</h2>
+        <p>
+          در تم دارک از ترکیب مشکی و زرد استفاده شده و در تم لایت، رنگ‌های سفید و
+          آبی آسمانی در کل سایت اعمال می‌شود.
+        </p>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+      <section className="grid">
+        {featuredContent.map((item) => (
+          <article className="card" key={`${item.title}-${item.type}`}>
+            <span className="badge">{item.type}</span>
+            <h3>{item.title}</h3>
+            <ul>
+              <li>سال انتشار: {item.year}</li>
+              <li>ژانر: {item.genre}</li>
+              <li>امتیاز: {item.rating}</li>
+            </ul>
+          </article>
+        ))}
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </div>
   )
 }
 
